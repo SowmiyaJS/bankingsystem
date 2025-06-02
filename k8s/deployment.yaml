@@ -18,8 +18,8 @@ spec:
         runAsUser: 1001
 
       containers:
-      - name: banking-app
-        image: banking-app:4
+      - name: open-banking-web
+        image: jayasowmiya/open-banking-web:latest
         imagePullPolicy: Never
         command: ["npm", "start"]
         resources:
