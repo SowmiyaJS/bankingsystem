@@ -1,0 +1,33 @@
+apiVersion: apps/v1  
+kind: Deployment     
+metadata:
+  name: banking-app
+  namespace: microservices  
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1001
+
+      containers:
+      - name: banking-app
+        image: banking-app:4
+        imagePullPolicy: Never
+        command: ["npm", "start"]
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:    
+            memory: "256Mi"
+            cpu: "200m"
+        securityContext:
+          readOnlyRootFilesystem: true

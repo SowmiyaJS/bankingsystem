@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Banking App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+      background-color: #f2f2f2;
+    }
+    .container {
+      background-color: white;
+      padding: 20px;
+      max-width: 400px;
+      margin: auto;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #ccc;
+    }
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      box-sizing: border-box;
+    }
+    button {
+      width: 48%;
+      padding: 10px;
+      margin-top: 15px;
+      margin-right: 2%;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    button:hover {
+      background-color: #2980b9;
+    }
+    #output {
+      margin-top: 20px;
+      background-color: #ecf0f1;
+      padding: 10px;
+      white-space: pre-wrap;
+      border-radius: 5px;
+      font-family: monospace;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Banking App</h1>
+    <input id="name" placeholder="Enter your name" />
+    <input id="amount" placeholder="Enter amount" type="number" />
+    <div>
+      <button onclick="create()">Create</button>
+      <button onclick="balance()">Balance</button>
+    </div>
+    <div>
+      <button onclick="deposit()">Deposit</button>
+      <button onclick="withdraw()">Withdraw</button>
+    </div>
+    <div id="output"></div>
+  </div>
+
+  <script>
+    // Simulated backend (in-memory)
+    const users = {};
+
+    function getUser() {
+      const user = document.getElementById("name").value.trim();
+      if (!user) {
+        showOutput("❌ Please enter a valid name.");
+        throw new Error("Invalid name");
+      }
+      return user;
+    }
+
+    function getAmount() {
+      const amount = parseFloat(document.getElementById("amount").value);
+      if (isNaN(amount) || amount <= 0) {
+        showOutput("❌ Please enter a valid amount.");
+        throw new Error("Invalid amount");
+      }
+      return amount;
+    }
+
+    function showOutput(message) {
+      document.getElementById("output").textContent = typeof message === "string" ? message : JSON.stringify(message, null, 2);
+    }
+
+    function create() {
+      try {
+        const user = getUser();
+        if (users[user]) {
+          showOutput("⚠️ Account already exists.");
+        } else {
+          users[user] = 0;
+          showOutput(`✅ Account created for ${user}.`);
+        }
+      } catch (e) {}
+    }
+
+    function deposit() {
+      try {
+        const user = getUser();
+        const amount = getAmount();
+        if (!users[user]) {
+          showOutput("❌ Account does not exist.");
+        } else {
+          users[user] += amount;
+          showOutput(`✅ Deposited ₹${amount}. New Balance: ₹${users[user]}`);
+        }
+      } catch (e) {}
+    }
+
+    function withdraw() {
+      try {
+        const user = getUser();
+        const amount = getAmount();
+        if (!users[user]) {
+          showOutput("❌ Account does not exist.");
+        } else if (users[user] < amount) {
+          showOutput("❌ Insufficient balance.");
+        } else {
+          users[user] -= amount;
+          showOutput(`✅ Withdrawn ₹${amount}. New Balance: ₹${users[user]}`);
+        }
+      } catch (e) {}
+    }
+
+    function balance() {
+      try {
+        const user = getUser();
+        if (!users[user]) {
+          showOutput("❌ Account does not exist.");
+        } else {
+          showOutput(`💰 Balance for ${user}: ₹${users[user]}`);
+        }
+      } catch (e) {}
+    }
+  </script>
+</body>
+</html>
