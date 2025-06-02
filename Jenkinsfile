@@ -23,7 +23,7 @@ pipeline {
         }
         stage('Deploy to Kubernetes') {  // Deploy microservice to Kubernetes
             steps {
-        sh "kubectl apply -f k8s/ -n microservices"
+                sh "kubectl apply -f k8s/ -n microservices"
            }
     }
 
