@@ -57,7 +57,6 @@ app.get("/balance/:username", (req, res) => {
 });
 
 const PORT = process.env.PORT || 8080;
-
-app.listen(PORT, () => {
-  console.log(`Bank app running on http://localhost:${PORT}`);
+app.listen(PORT, "0.0.0.0", () => {
+    console.log(`Banking app running on http://0.0.0.0:${PORT}`);
 });
