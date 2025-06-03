@@ -24,7 +24,7 @@ pipeline {
         stage('Deploy to Kubernetes') {  // Deploy microservice to Kubernetes
             steps {
                 sh """
-                kubectl config use-context kubernetes
+                kubectl config use-context kubernetes-admin@kubernetes
                 kubectl apply -f k8s/ -n microservices
                 kubectl get pods -n microservices
                 """
