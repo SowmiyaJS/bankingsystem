@@ -23,7 +23,7 @@ spec:
       containers:
       - name: open-banking-web
         image: jayasowmiya/open-banking-web:latest
-        imagePullPolicy: Never
+        imagePullPolicy: IfNotPresent
         command: ["npm", "start"]
         resources:
           requests:
