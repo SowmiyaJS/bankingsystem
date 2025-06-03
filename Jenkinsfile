@@ -25,8 +25,7 @@ pipeline {
             steps {
                 sh """
                 export KUBECONFIG=/home/ec2-user/.kube/config  # Set correct kubeconfig path
-                kubectl config use-context kubernetes-admin@kubernetes
-                kubectl apply -f k8s/ -n microservices
+                kkubectl apply -f /var/lib/jenkins/workspace/Bankingapp_microservice/k8s/deployment.yaml -n microservices
                 kubectl get pods -n microservices
                 """
     }
