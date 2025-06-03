@@ -5,10 +5,9 @@ metadata:
   namespace: microservices
 spec:
   selector:
-    app: my-app
+    app: banking-app
   ports:
     - protocol: TCP
       port: 80
       targetPort: 8080
-      nodePort: 32767  
-  type: NodePort  
+  type: LoadBalancer
