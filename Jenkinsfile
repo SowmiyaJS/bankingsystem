@@ -21,14 +21,15 @@ pipeline {
                 }
             }
         }
-        stage('Deploy to Kubernetes') {  // Deploy microservice to Kubernetes
+        stage('Deploy to Kubernetes') {
             steps {
                 sh """
+                export KUBECONFIG=/home/ec2-user/.kube/config  # Set correct kubeconfig path
                 kubectl config use-context kubernetes-admin@kubernetes
                 kubectl apply -f k8s/ -n microservices
                 kubectl get pods -n microservices
                 """
-            }
-        }
+    }
+}
     }
 }
