@@ -17,7 +17,7 @@ spec:
         runAsNonRoot: true
         runAsUser: 1001
       nodeSelector:
-        kubernetes.io/hostname: k8s-worker
+        kubernetes.io/hostname: ip-10-0-1-253.eu-west-2.compute.internal
 
 
       containers:
