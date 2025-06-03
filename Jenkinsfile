@@ -24,7 +24,7 @@ pipeline {
         stage('Deploy to Kubernetes') {
             steps {
                 sh """
-                    kubectl apply -f /var/lib/jenkins/workspace/Bankingapp_microservice/k8s/deployment.yaml -n microservices
+                    kubectl apply -f /var/lib/jenkins/workspace/Bankingapp_microservice/k8s -n microservices
                     kubectl get pods -n microservices
                 """
     }
