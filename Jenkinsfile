@@ -28,6 +28,15 @@ pipeline {
                     kubectl get pods -n microservices
                 """
     }
+
+        stage('Get Service URL') {
+            steps {
+                sh """
+                    
+                    kubectl get svc banking-app -n microservices
+        """
+    }
+}
 }
     }
 }
