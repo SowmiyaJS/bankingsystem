@@ -11,7 +11,7 @@ pipeline {
         }
         stage('Build Docker Image') {
             steps {
-        sh "docker build -t jayasowmiya/open-banking-web:latest -f ./docker/Dockerfile ."
+                sh "docker build -t $DOCKER_IMAGE -f ./docker/Dockerfile ."
             }
         }
         stage('Push to DockerHub') {  // Push container image to DockerHub
@@ -23,9 +23,12 @@ pipeline {
         }
         stage('Deploy to Kubernetes') {  // Deploy microservice to Kubernetes
             steps {
-                sh "kubectl apply -f k8s/ -n microservices"
-           }
-    }
-
+                sh """
+                kubectl config use-context kubernetes
+                kubectl apply -f k8s/ -n microservices
+                kubectl get pods -n microservices
+                """
+            }
+        }
     }
 }

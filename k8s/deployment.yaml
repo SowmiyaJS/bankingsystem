@@ -16,6 +16,9 @@ spec:
       securityContext:
         runAsNonRoot: true
         runAsUser: 1001
+      nodeSelector:
+        kubernetes.io/hostname: k8s-worker
+
 
       containers:
       - name: open-banking-web
