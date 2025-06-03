@@ -32,7 +32,7 @@ pipeline {
         stage('Get Service URL') {  
             steps {
                 sh """
-                    kubectl get svc banking-service -n microservices
+                    kubectl get svc -n microservices
                 """
             }
         }
