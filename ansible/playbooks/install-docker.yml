@@ -3,31 +3,24 @@
   become: yes
   tasks:
     - name: Update package cache
-      apt:
-        update_cache: yes
+      yum:
+        name: "*"
+        state: latest
 
     - name: Install dependencies
-      apt:
+      yum:
         name:
-          - apt-transport-https
-          - ca-certificates
-          - curl
-          - software-properties-common
+          - yum-utils
+          - device-mapper-persistent-data
+          - lvm2
         state: present
 
-    - name: Add Docker GPG key
-      shell: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-
     - name: Add Docker repository
-      shell: add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
-
-    - name: Update package cache again
-      apt:
-        update_cache: yes
+      shell: amazon-linux-extras enable docker
 
     - name: Install Docker
-      apt:
-        name: docker-ce
+      yum:
+        name: docker
         state: present
 
     - name: Start Docker service
