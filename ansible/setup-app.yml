@@ -1,0 +1,6 @@
+- name: Deploy Microservice
+  hosts: all
+  become: yes
+  tasks:
+    - name: Apply Kubernetes manifests
+      shell: kubectl apply -f k8s/
